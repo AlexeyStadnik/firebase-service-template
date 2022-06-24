@@ -13,7 +13,7 @@ buildscript {
         r4jVersion = "1.7.1"
         lombockVersion = "1.18.20"
         jacksonDatabindNullableVersion = "0.2.1"
-        firebaseVersion = "8.1.0"
+        firebaseVersion = "9.0.0"
         hibernateTypesVersion = "2.9.9"
     }
     dependencies {
@@ -22,7 +22,7 @@ buildscript {
 }
 
 plugins {
-    id "org.springframework.boot" version "2.5.4"
+    id "org.springframework.boot" version "2.6.7"
     id 'io.spring.dependency-management' version "1.0.11.RELEASE"
     id 'java'
 }
@@ -41,7 +41,7 @@ apply from: "gradle/pmd.gradle"
 
 group = 'com.'
 version = '0.1'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
 
 configurations {
     testAnnotationProcessor.extendsFrom annotationProcessor
@@ -93,8 +93,8 @@ dependencies {
     implementation "org.openapitools:jackson-databind-nullable:${jacksonDatabindNullableVersion}"
     implementation "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
 
-    compileOnly "org.projectlombok:lombok:${lombockVersion}"
-    annotationProcessor "org.projectlombok:lombok:${lombockVersion}"
+    compileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
     // should be declared after lombock
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"

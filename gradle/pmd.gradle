@@ -6,7 +6,7 @@ tasks.withType(Pmd){
 }
 
 pmd {
-    toolVersion = '6.16.0'
+    toolVersion = '6.46.0'
     ignoreFailures = false
     ruleSets = []
     ruleSetFiles = files("config/pmd.xml")
