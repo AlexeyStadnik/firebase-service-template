@@ -28,7 +28,7 @@ public class PostgresInitializer implements ApplicationContextInitializer<Config
     }
 
     public static String getHost() {
-        return POSTGRES.getContainerIpAddress();
+        return POSTGRES.getHost();
     }
 
     public static int getPort() {

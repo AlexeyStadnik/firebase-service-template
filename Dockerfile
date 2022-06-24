@@ -1,6 +1,6 @@
-FROM openjdk:11
+FROM openjdk:17
 VOLUME /tmp
-COPY build/libs/user-service-0.1.jar app.jar
+COPY build/libs/service-template-0.1.jar app.jar
 EXPOSE 8080
 
 ENV TIMEZONE="UTC"

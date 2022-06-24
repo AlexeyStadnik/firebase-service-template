@@ -29,7 +29,7 @@ public class MinioInitializer implements ApplicationContextInitializer<Configura
     }
 
     public static String getHost() {
-        return MINIO.getContainerIpAddress();
+        return MINIO.getHost();
     }
 
     public static int getPort() {

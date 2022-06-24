@@ -51,9 +51,9 @@ spring:
     show-sql: true
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: nft-analytics
-    password: nft-analytics
-    url: jdbc:postgresql://localhost:5432/user_service
+    username: service-template
+    password: service-template
+    url: jdbc:postgresql://localhost:5432/service_template
   config:
     activate:
       on-profile: local
@@ -64,8 +64,6 @@ app:
         key: "123"
       - role: "ADMIN"
         key: "124"
-      - role: "ANALYTICS_SERVICE"
-        key: "125"
 
 sentry:
   dsn: ""

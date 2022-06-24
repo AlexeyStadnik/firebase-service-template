@@ -4,8 +4,8 @@ services:
   postgres-db:
     image: postgres:13.1-alpine
     environment:
-      - POSTGRES_USER=user-service
-      - POSTGRES_PASSWORD=user-service
-      - POSTGRES_DB=user_service
+      - POSTGRES_USER=service-template
+      - POSTGRES_PASSWORD=service-template
+      - POSTGRES_DB=service_template
     ports:
       - "5432:5432"

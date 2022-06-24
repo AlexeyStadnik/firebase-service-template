@@ -10,10 +10,7 @@ checkstyle {
     reportsDir = file("$project.buildDir/reports/checkstyle")
     dependencies {
         assert project.hasProperty("checkstyleVersion")
-
-        //noinspection GroovyAssignabilityCheck
         checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
-        //noinspection GroovyAssignabilityCheck
         checkstyle "com.github.sevntu-checkstyle:sevntu-checks:${sevntuChecksVersion}"
     }
 }
