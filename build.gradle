@@ -1,0 +1,107 @@
+buildscript {
+    ext {
+        basePackage = "com.service"
+        testcontainersVersion = "1.15.3"
+        springfoxSwaggerVersion = "2.9.2"
+        swaggerAnnotationsVersion = "1.6.2"
+        jjwtVersion = "0.11.2"
+        openApiVersion = '5.2.1'
+        mapstructVersion = "1.4.2.Final"
+        javaFakerVersion = "1.0.2"
+        awsSdkVersion = "1.12.75"
+        sentryVersion = "5.2.0"
+        r4jVersion = "1.7.1"
+        lombockVersion = "1.18.20"
+        jacksonDatabindNullableVersion = "0.2.1"
+        firebaseVersion = "8.1.0"
+        hibernateTypesVersion = "2.9.9"
+    }
+    dependencies {
+        classpath "org.openapitools:openapi-generator-gradle-plugin:${openApiVersion}"
+    }
+}
+
+plugins {
+    id "org.springframework.boot" version "2.5.4"
+    id 'io.spring.dependency-management' version "1.0.11.RELEASE"
+    id 'java'
+}
+
+apply plugin: 'pmd'
+apply plugin: 'checkstyle'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.openapi.generator'
+apply plugin: 'jacoco'
+
+apply from: "gradle/swagger.gradle"
+apply from: "gradle/mapstruct.gradle"
+apply from: "gradle/checkstyle.gradle"
+apply from: "gradle/jacoco.gradle"
+apply from: "gradle/pmd.gradle"
+
+group = 'com.'
+version = '0.1'
+sourceCompatibility = '11'
+
+configurations {
+    testAnnotationProcessor.extendsFrom annotationProcessor
+    testCompileOnly.extendsFrom compileOnly
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
+    implementation "org.springframework.boot:spring-boot-starter-mustache"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "org.springframework.boot:spring-boot-devtools"
+    implementation "org.springframework.boot:spring-boot-configuration-processor"
+
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    implementation "com.google.firebase:firebase-admin:${firebaseVersion}"
+
+    implementation "com.vladmihalcea:hibernate-types-52:${hibernateTypesVersion}"
+
+    implementation "org.yaml:snakeyaml"
+
+    implementation "org.flywaydb:flyway-core"
+
+    implementation "io.swagger:swagger-annotations:${swaggerAnnotationsVersion}"
+    implementation "org.mapstruct:mapstruct-jdk8:${mapstructVersion}"
+
+    implementation "com.amazonaws:aws-java-sdk:${awsSdkVersion}"
+    implementation "com.amazonaws:aws-java-sdk-s3:${awsSdkVersion}"
+
+    implementation "io.sentry:sentry-spring-boot-starter:${sentryVersion}"
+
+    implementation("io.github.resilience4j:resilience4j-core:${r4jVersion}")
+    implementation("io.github.resilience4j:resilience4j-retry:${r4jVersion}")
+
+    runtimeOnly "org.postgresql:postgresql"
+
+    //required by the codegen plugin
+    implementation "org.openapitools:jackson-databind-nullable:${jacksonDatabindNullableVersion}"
+    implementation "io.springfox:springfox-swagger-ui:${springfoxSwaggerVersion}"
+
+    compileOnly "org.projectlombok:lombok:${lombockVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombockVersion}"
+    // should be declared after lombock
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
+    testImplementation "com.github.javafaker:javafaker:${javaFakerVersion}"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.springframework.security:spring-security-test"
+    testImplementation "org.testcontainers:testcontainers:${testcontainersVersion}"
+    testImplementation "org.testcontainers:postgresql:${testcontainersVersion}"
+}

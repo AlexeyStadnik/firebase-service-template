@@ -1,0 +1,19 @@
+checkstyle {
+
+    ignoreFailures = false
+    showViolations = true
+
+    project.ext.checkstyleVersion = '8.18'
+    project.ext.sevntuChecksVersion = '1.32.0'
+
+    configDirectory = file("config")
+    reportsDir = file("$project.buildDir/reports/checkstyle")
+    dependencies {
+        assert project.hasProperty("checkstyleVersion")
+
+        //noinspection GroovyAssignabilityCheck
+        checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
+        //noinspection GroovyAssignabilityCheck
+        checkstyle "com.github.sevntu-checkstyle:sevntu-checks:${sevntuChecksVersion}"
+    }
+}

@@ -1,0 +1,27 @@
+{
+  "deepLinking": true,
+  "displayOperationId": true,
+  "defaultModelsExpandDepth": 1,
+  "defaultModelExpandDepth": 1,
+  "defaultModelRendering": "example",
+  "displayRequestDuration": false,
+  "docExpansion": "list",
+  "filter": false,
+  "operationsSorter": "default",
+  "showExtensions": false,
+  "tagsSorter": "default",
+  "validatorUrl": null,
+  "apisSorter": "default",
+  "jsonEditor": false,
+  "showRequestHeaders": false,
+  "supportedSubmitMethods": [
+    "get",
+    "head",
+    "post",
+    "put",
+    "patch",
+    "delete",
+    "options",
+    "trace"
+  ]
+}

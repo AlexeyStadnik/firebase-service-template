@@ -1,0 +1,15 @@
+tasks.withType(Pmd){
+    reports{
+        xml.enabled=true
+        html.enabled=true
+    }
+}
+
+pmd {
+    toolVersion = '6.16.0'
+    ignoreFailures = false
+    ruleSets = []
+    ruleSetFiles = files("config/pmd.xml")
+    reportsDir = file("build/reports/pmd")
+    consoleOutput = true
+}

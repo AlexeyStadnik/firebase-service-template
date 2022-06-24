@@ -1,0 +1,49 @@
+jacoco {
+    toolVersion = "0.8.4"
+}
+def jacocoExclude =  [
+        '**/DialogFlowApplication.class',
+        'com/service/controllers/api/*.class',
+        'com/service/model/rest/*.class',
+        'com/service/openapitools/*.class',
+]
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/reports/jacoco/html")
+    }
+    afterEvaluate {
+        getClassDirectories().setFrom(classDirectories.files.collect {
+            fileTree(dir: it, exclude: jacocoExclude)
+        })
+    }
+}
+
+jacocoTestCoverageVerification {
+    afterEvaluate {
+        getClassDirectories().setFrom(classDirectories.files.collect {
+            fileTree(dir: it, exclude: jacocoExclude)
+        })
+    }
+
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.0
+            }
+        }
+    }
+}
+
+
+test {
+    jacoco {
+        destinationFile = file("$buildDir/reports/jacoco/test.exec")
+        classDumpDir = file("$buildDir/reports/jacoco/classpathdumps")
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
+jacocoTestCoverageVerification.mustRunAfter jacocoTestReport

@@ -1,0 +1,12 @@
+[
+  {
+    "name": "swagger.json",
+    "url": "/user-service/v1/openapi.json",
+    "location": "/swagger.json"
+  },
+  {
+    "name": "swagger.yaml",
+    "url": "/user-service/v1/openapi.yaml",
+    "location": "/swagger.yaml"
+  }
+]

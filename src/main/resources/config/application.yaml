@@ -1,0 +1,94 @@
+app:
+  security:
+    #Seems like there is a bug in Spring boot when array parameters are ignored in env file if they are not presented in yaml file
+    #So we need here to have a least single parameter which will be overwritten by env file
+    api-keys:
+      - role: "FIREBASE"
+        key: "apsdsaqmeqwzlaqw"
+  executor-max-pool-size: 10
+  aws:
+    region: "${APP_AWS_REGION:}"
+    access-key: "${APP_AWS_ACCESS_KEY:}"
+    secret-key: "${APP_AWS_SECRET_KEY:}"
+
+sentry:
+  dsn: ${APP_SENTRY_DSN:}
+  traces-sample-rate: 0
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: "${SPRING_DATASOURCE_URL:}"
+    username: "${SPRING_DATASOURCE_USERNAME:}"
+    password: "${SPRING_DATASOURCE_PASSWORD:}"
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      properties:
+        hibernate:
+          jdbc:
+            lob:
+              non_contextual_creation: true
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+  jackson:
+    default-property-inclusion: non_null
+
+server:
+  port: "${PORT:8080}"
+
+
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+---
+spring:
+  jpa:
+    show-sql: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: nft-analytics
+    password: nft-analytics
+    url: jdbc:postgresql://localhost:5432/user_service
+  config:
+    activate:
+      on-profile: local
+app:
+  security:
+    api-keys:
+      - role: "FIREBASE"
+        key: "123"
+      - role: "ADMIN"
+        key: "124"
+      - role: "ANALYTICS_SERVICE"
+        key: "125"
+
+sentry:
+  dsn: ""
+  traces-sample-rate: 0
+---
+spring:
+  jpa:
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+      file-size-threshold: 1MB
+  flyway:
+    baseline-on-migrate: true
+  config:
+    activate:
+      on-profile: test
+
+app:
+  aws:
+    region: "eu-central-1"
+    access-key: "ACCESS_KEY"
+    secret-key: "Secret_Key"
+    s3config:
+      endpoint-url: "localhost:9000"

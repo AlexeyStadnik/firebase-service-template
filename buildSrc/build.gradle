@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    jsonpath_version = '2.2.0'
+    openApiVersion = '5.2.1'
+}
+
+dependencies {
+    implementation "org.openapitools:openapi-generator-gradle-plugin:${openApiVersion}"
+}
